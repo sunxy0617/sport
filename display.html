@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>卡路里燃烧展示</title>
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="js/static.js" type="text/javascript" charset="utf-8"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+		<script src="js/jQuery3.4.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/display.css" />
+		<link rel="stylesheet" type="text/css" href='css/swiper-bundle.min.css' />
+
+	</head>
+
+	<body>
+		<div style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -9;display: flex;align-items: center;justify-content: center;">
+			<img src="img/display/logo.png" style="position: fixed;top: 40px;left:100px;height: 60px;z-index: -7;" />
+			<img id='backBack' style="position: fixed;width: 100%;height: 100%;z-index: -6;background-color: #006666;" src="img/display/back/back1-min.jpg">
+			<img id='back' style="position: fixed;width: 100%;height: 100%;z-index: -5;background-color: #006666;" src="img/display/back/back1-min.jpg">
+		</div>
+		
+		<div class="mui-content">
+			<div class="title">
+				<div style="font-size: 40px;"> 
+					高效燃烧你的卡路里
+				</div>
+				<div>
+					活动时间：4月10日 - 4月11日
+				</div>
+			</div>
+			<div id="app" class="body">
+				<!-- <input type="button"  @click="test()" value="ttttt"> -->
+				<div class="list listLeft">
+					<div class="listInner">
+						<div class="listHead">
+							<div>
+								无锡马拉松 男子组
+							</div>
+							<span class="listHeadTitle">
+								燃烧卡路里排名
+							</span>
+						</div>
+						<div class="listBody">
+							<div v-for="(arr,arrIndex) in manGroup" class="swiper-container" style="height: 55px;">
+								<div class="swiper-wrapper">
+									<div v-for="(item,index) in arr" class="swiper-slide">
+										<div class="listItem">
+											<div class="item1">
+												<img v-if="(index*10+arrIndex)==0" src="img/display/Au.png">
+												<img v-if="(index*10+arrIndex)==1" src="img/display/Ag.png">
+												<img v-if="(index*10+arrIndex)==2" src="img/display/Cu.png">
+												<span v-text="(index*10+arrIndex)+1"></span>
+											</div>
+											<div class="item2">
+												<img src="img/display/phone.png">
+											</div>
+											<div class="item3">
+												<span v-text="item.phone"></span>
+											</div>
+											<div class="item4">
+												<img src="img/display/heart.png">
+											</div>
+											<div class="item5">
+												<span v-text="item.heartRate"></span>
+											</div>
+											<div class="item6">
+												<img src="img/display/fire.png">
+											</div>
+											<div class="item7">
+												<span v-text="item.calorie"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="list listMiddle">
+					<div class="listInner">
+						<div class="listHead">
+							<div>
+								无锡马拉松 女子组
+							</div>
+							<span class="listHeadTitle">
+								燃烧卡路里排名
+							</span>
+						</div>
+						<div class="listBody">
+							<div v-for="(arr,arrIndex) in womanGroup" class="swiper-container" style="height: 55px;">
+								<div class="swiper-wrapper">
+									<div v-for="(item,index) in arr" class="swiper-slide">
+										<div class="listItem">
+											<div class="item1">
+												<img v-if="(index*10+arrIndex)==0" src="img/display/Au.png">
+												<img v-if="(index*10+arrIndex)==1" src="img/display/Ag.png">
+												<img v-if="(index*10+arrIndex)==2" src="img/display/Cu.png">
+												<span v-text="(index*10+arrIndex)+1"></span>
+											</div>
+											<div class="item2">
+												<img src="img/display/phone.png">
+											</div>
+											<div class="item3">
+												<span v-text="item.phone"></span>
+											</div>
+											<div class="item4">
+												<img src="img/display/heart.png">
+											</div>
+											<div class="item5">
+												<span v-text="item.heartRate"></span>
+											</div>
+											<div class="item6">
+												<img src="img/display/fire.png">
+											</div>
+											<div class="item7">
+												<span v-text="item.calorie"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="list listRight">
+					<div class="listInner">
+						<div class="listHead">
+							<div>
+								无锡马拉松 综合组
+							</div>
+							<span class="listHeadTitle">
+								燃烧卡路里排名
+							</span>
+						</div>
+						<div class="listBody">
+							<div v-for="(arr,arrIndex) in mixedGroup" class="swiper-container" style="height: 55px;">
+								<div class="swiper-wrapper">
+									<div v-for="(item,index) in arr" class="swiper-slide">
+										<div class="listItem">
+											<div class="item1">
+												<img v-if="(index*10+arrIndex)==0" src="img/display/Au.png">
+												<img v-if="(index*10+arrIndex)==1" src="img/display/Ag.png">
+												<img v-if="(index*10+arrIndex)==2" src="img/display/Cu.png">
+												<span v-text="(index*10+arrIndex)+1"></span>
+											</div>
+											<div class="item2">
+												<img src="img/display/phone.png">
+											</div>
+											<div class="item3">
+												<span v-text="item.phone"></span>
+											</div>
+											<div class="item4">
+												<img src="img/display/heart.png">
+											</div>
+											<div class="item5">
+												<span v-text="item.heartRate"></span>
+											</div>
+											<div class="item6">
+												<img src="img/display/fire.png">
+											</div>
+											<div class="item7">
+												<span v-text="item.calorie"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src='js/swiper-bundle.min.js'></script>
+		<script src="js/display.js" type="text/javascript" charset="utf-8"></script>
+		
+		<!-- 下面两行为火焰特效，需要的话放开注释就可以 -->
+		<!-- <canvas id="fireGraphic" width="2000" height="200" style="position: fixed;bottom: 0;left: 0;"></canvas> -->
+		<!-- <script src="js/fire.js" type="text/javascript" charset="utf-8"></script> -->
+	</body>
+
+</html>

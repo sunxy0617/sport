@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!-- 		<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="http://www.altuma.cn:10100/jstools/altuma_browser.js"></script>
+		<script type="text/javascript" src="js/total_static.js"></script> -->
+		<script src="js/jQuery3.4.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+		<!--<script src="https://cdn.staticfile.org/vue/1.0.28/vue.js"></script>-->
+		<!--	<script src="https://cdn.jsdelivr.net/vue.resource/0.7.0/vue-resource.min.js"></script>-->
+		<title></title>
+	</head>
+
+	<style>
+		.title {
+			font-weight: bold;
+			font-size: 20px;
+			margin: 20px 0 5px 0;
+		}
+
+		.memberList {
+			color: #5A5A5C;
+		}
+
+		.member {
+			margin: 10px 0 10px;
+			display: flex;
+			flex-direction: row;
+			border: 1px solid #CCCCCC;
+			align-items: center;
+			border-radius: 5px;
+		}
+
+		.memberList .preview {
+			width: 50px;
+			height: 50px;
+			display: block;
+		}
+
+		.memberList button {
+			width: 90px;
+			height: 30px;
+			border-radius: 17px;
+		}
+
+		input {
+			border: 0px;
+		}
+
+		.phone,
+		.heart_rate,
+		.calorie {
+			width: 100%;
+		}
+
+		td {
+			height: 40px;
+			line-height: 40px;
+		}
+
+		.arrow-up1,
+		.arrow-up2 {
+			width: 0;
+			height: 0;
+			border-left: 15px solid transparent;
+			border-right: 15px solid transparent;
+			border-bottom: 15px solid #fff;
+		}
+
+		.but {
+			width: 80%;
+			background-color: #363A3D;
+			color: white;
+			text-align: center;
+			margin: 20px auto;
+			height: 36px;
+			line-height: 40px;
+			border-radius: 30px;
+		}
+
+		.calorie,
+		.heart_rate,
+		.phone {
+			border: 0px;
+			padding-left: 20px;
+			background-color: #EEEEEE;
+			font-size: 14px;
+		}
+
+		.arrow-up1_div {
+			margin-left: 21%;
+		}
+
+		.arrow-up2_div {
+			margin-left: 70%;
+		}
+
+		.arrow-up1_div,
+		.arrow-up2_div {
+			width: 50%;
+			position: absolute;
+			top: 225px;
+		}
+
+		.input_div {
+			height: 40px;
+			line-height: 40px;
+			width: 75%;
+			margin: auto;
+			background-color: #EEEEEE;
+			border-radius: 30px;
+			margin-top: 20px;
+			overflow: hidden;
+		}
+
+		.title_choose1,
+		.title_choose2 {
+			text-align: center;
+			color: white;
+			width: 48%;
+			border: 0px solid white;
+			height: 30px;
+			line-height: 30px;
+		}
+
+		.title_choose2 {
+			margin-left: 49%;
+			margin-top: -30px;
+		}
+
+		.gender_word {
+			text-align: center;
+			width: 100%;
+			margin-top: 20px;
+		}
+
+		.gender_img {
+			width: 60px;
+			text-align: center;
+		}
+
+		.title_div {
+			width: 100%;
+			position: absolute;
+			top: 195px;
+		}
+
+		.title_img_div {
+			width: 100%;
+			height: 240px;
+			background-image: url(img/entering_bg.jpg);
+			background-repeat: repeat;
+			background-size: 100% 100%;
+		}
+	</style>
+
+	<body style="background-color: white;">
+		<div class="mui-content" style="width: 100%;height: 100%;background-color: white;">
+			<div class="title_img_div">
+				<div class="title_div">
+					<div class="title_choose1" @click="input_but">输入页</div>
+					<div class="title_choose2" @click="show_info">全部页</div>
+				</div>
+
+				<div class="arrow-up1_div" v-if="show_flag==1">
+					<div class="arrow-up1"> </div>
+				</div>
+				<div class="arrow-up2_div" v-if="show_flag==2">
+					<div class="arrow-up2"> </div>
+				</div>
+
+			</div>
+			<div v-if="show_flag==1">
+
+				<div class="input_div">
+					<input class="phone" placeholder="请输入手机号" />
+				</div>
+
+				<div style="width:75%;margin:auto;margin-top: 20px;">
+					<div style="color: #555859;margin: 0 0 15px 0; ">请选择您的性别：</div>
+					<div style="display: flex;flex-direction: row;align-items: center;justify-content: space-around;">
+						<div class="man_div" @click="chose_man">
+							<img src="img/man_red.png" class="gender_img man_img" />
+						</div>
+						<div style="width: 1px;height: 50px;background-color: #e7e7e7;">
+
+						</div>
+						<div class="woman_div" @click="chose_woman">
+							<img src="img/woman_gray.png" class="gender_img woman_img" />
+						</div>
+					</div>
+				</div>
+
+				<div class="input_div">
+					<input class="heart_rate" maxlength="3" placeholder="请输入心率" />
+				</div>
+
+				<div class="input_div">
+					<input class="calorie" placeholder="请输入卡路里" />
+				</div>
+
+				<div class="but" @click="sub"> 提交</div>
+
+			</div>
+
+			<div v-if="show_flag==2" style="background-color: white;margin: 20px;">
+
+				<div class="memberList">
+					<div v-for="member in memberList" class="member">
+						<div>
+							<img class="preview" :src="member.sex==0?'img/man.png':'img/woman.png'">
+						</div>
+						<div style="flex-grow: 1;display: flex;flex-direction: column;padding-left: 5px;">
+							<div v-text="'时间:'+member.time" style="font-size: 10px;"></div>
+							<div style="display: flex;flex-direction: row;justify-content: space-between;">
+								<div v-text="'手机:'+member.phone" style="font-size: 10px;"></div>
+								<div v-text="'心率:'+member.heartRate" style="font-size: 10px;"></div>
+								<div v-text="'卡路里:'+member.calorie" style="font-size: 10px;margin-right: 10px;"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			mui.init();
+			var sub_flag = true;
+
+			var vm = new Vue({
+				el: '.mui-content',
+				data: {
+					show_flag: 1,
+					gender_flag: 1,
+					memberList: [],
+				},
+
+				mounted: function() {
+					this.getMemberList();
+				},
+				methods: {
+					input_but: function() {
+						this.show_flag = 1;
+					},
+					show_info: function() {
+						this.show_flag = 2;
+					},
+					chose_man: function() {
+
+						$(".man_img").attr("src", "img/man_red.png");
+						$(".woman_img").attr("src", "img/woman_gray.png");
+						this.gender_flag = 1;
+					},
+					chose_woman: function() {
+						$(".woman_img").attr("src", "img/woman_red.png");
+						$(".man_img").attr("src", "img/man_gray.png");
+						this.gender_flag = 0;
+					},
+					sub: function() {
+						var that = this;
+						sub_flag = true;
+						checkPhone();
+						checkHeart_rate();
+						checkCalorie();
+						if (sub_flag) {
+							/**
+							 * 在下面的ajax中执行您的提交算法
+							 */
+
+							$.ajax({
+								url: "",
+								type: "post",
+								data: {
+									calorie: $(".calorie").val(),
+									heart_rate: $(".heart_rate").val(),
+									phone: $(".phone").val(),
+									sex: that.gender_flag
+								},
+								success: function(result) {
+									if (result.state) {
+										/**
+										 * 提交成功后续处理
+										 */
+										var item = {
+											sex: that.gender_flag,
+											phone: $(".phone").val(),
+											heartRate: $(".heart_rate").val(),
+											calorie:$(".calorie").val(),
+											time:dateFormat('yyyy-MM-dd HH:mm:ss',new Date())
+										}
+										that.memberList.unshift(item);
+									} else {
+										/**
+										 * 提交失败后续处理
+										 */
+									}
+								},
+								error: function(obj, errorInfo) {
+									console.log(errorInfo)
+								}
+							})
+						}
+					},
+					getMemberList: function() {
+						var that = this;
+						$.ajax({
+							type: "get",
+							url: "data/admin.json",
+							success: function(result) {
+								if (typeof(result) == 'string')
+									result = JSON.parse(result)
+								if (result.state) {
+									var memberList = result.memberList;
+									that.memberList = memberList;
+								} else {
+									mui.alert(result.msg);
+								}
+							},
+							error: function(obj, errorInfo) {
+								console.log(errorInfo)
+							}
+						});
+					}
+				}
+			});
+
+			$(function() {
+				$(".phone").blur(function() {
+					checkPhone();
+				});
+				$(".heart_rate").blur(function() {
+					checkHeart_rate();
+				});
+				$(".calorie").blur(function() {
+					checkCalorie();
+				});
+			})
+
+			function checkPhone() {
+				var re = /^1\d{10}$/;
+				if (!re.test($(".phone").val())) { //判断字符是否是11位数字
+					mui.toast("请填写11位数字")
+					sub_flag = false;
+				}
+				if ($(".phone").val() == "") {
+					mui.toast("手机号不能为空");
+					sub_flag = false;
+				}
+			}
+
+			function checkHeart_rate() {
+				var re=/^[1-9]\d{0,2}$/;
+				if (!re.test($(".heart_rate").val())) {
+					mui.toast("三位以内数字")
+					sub_flag = false;
+				}
+				if ($(".heart_rate").val() == "") {
+					mui.toast("心率不能为空");
+					sub_flag = false;
+				}
+			}
+
+			function checkCalorie() {
+				if ($(".calorie").val() == "") {
+					mui.toast("卡路里不能为空");
+					sub_flag = false;
+				}
+			}
+			
+			function dateFormat(fmt, date) {
+				let ret;
+				const opt = {
+					"y+": date.getFullYear().toString(), // 年
+					"M+": (date.getMonth() + 1).toString(), // 月
+					"d+": date.getDate().toString(), // 日
+					"H+": date.getHours().toString(), // 时
+					"m+": date.getMinutes().toString(), // 分
+					"s+": date.getSeconds().toString() // 秒
+					// 有其他格式化字符需求可以继续添加，必须转化成字符串
+				};
+				for (let k in opt) {
+					ret = new RegExp("(" + k + ")").exec(fmt);
+					if (ret) {
+						fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+					};
+				};
+				return fmt;
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<script src="js/jQuery3.4.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+		<title></title>
+	</head>
+
+	<style>
+		html {
+			height: 100%;
+		}
+
+		body {
+			background-image: url(img/enter_pwd_bg.jpg);
+			background-size: cover;
+			background-size: 100% 100%;
+			background-repeat: no-repeat;
+		}
+
+		.input_div {
+			width: 60%;
+			margin-left: 20%;
+			background-color: #B2BFC7;
+			margin-top: 200px;
+			background-image: url(img/pwd.png);
+			background-size: cover;
+			background-size: 20px 20px;
+			background-repeat: no-repeat;
+			background-position: 10px 10px;
+			height: 40px;
+			line-height: 40px;
+		}
+
+		.pwd {}
+
+		.sub {
+			width: 60%;
+			margin-left: 20%;
+			background-color: #363A3D;
+			color: white;
+			text-align: center;
+			margin-top: 20px;
+			height: 30px;
+			line-height: 30px;
+			border-radius: 10px;
+		}
+	</style>
+	<body>
+		<div class="input_div">
+			<input class="pwd" type="password" style="background-color:#B2BFC7 ;border: 0px;
+		    	width: 85%;margin-left: 14%;
+				height: 30px;line-height: 30px;" placeholder="请输入密码" />
+		</div>
+		<div class="sub">
+			进入
+		</div>
+	</body>
+
+	<script>
+		$(function() {
+			$(".sub").click(function() {
+				if ($(".pwd").val() == "") {
+					mui.toast("请输入密码");
+				} else {
+					$.ajax({
+						type: "post",
+						url: "",
+						data: {
+							pwd: $(".pwd").val()
+						},
+						success: function(result) {
+							if(result.state){
+								window.location.href='entering.html'
+							}
+							else{
+								mui.toast("密码输入有误！");
+							}
+							
+						},
+						error: function(obj, errorInfo) {
+							console.log(errorInfo)
+						}
+					});
+				}
+			})
+		})
+	</script>
+
+</html>

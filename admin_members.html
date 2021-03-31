@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>参赛人员管理</title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script src="js/static.js" type="text/javascript" charset="utf-8"></script>
+		<!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+		<script src="js/jQuery3.4.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.title {
+				font-weight: bold;
+				font-size: 20px;
+				margin: 20px 0 5px 0;
+			}
+
+			.memberList {
+				color: #5A5A5C;
+			}
+
+			.member {
+				margin: 10px 0 10px;
+				display: flex;
+				flex-direction: row;
+				border: 1px solid gray;
+			}
+
+			.memberList .preview {
+				width: 115px;
+				height: 75px;
+				display: block;
+			}
+
+			.memberList button {
+				width: 90px;
+				height: 30px;
+				border-radius: 17px;
+			}
+		</style>
+	</head>
+	<body style="background-color: white;">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">参加人员管理</h1>
+		</header>
+		<div id='app' class="mui-content" style="background-color: white;margin: 20px;">
+			<div style="text-align: right;">
+				<a href="update_pwd.html">
+					<button type="button" class="mui-btn mui-btn-blue">修改登录密码</button>
+				</a>
+			</div>
+			<div class="memberList">
+				<div v-for="member in memberList" class="member">
+					<div>
+						<img class="preview" :src="member.sex==0?'img/admin/woman.png':'img/admin/man.png'">
+					</div>
+					<div style="flex-grow: 1;display: flex;flex-direction: column;padding-left: 5px;">
+						<div v-text="'手机:'+member.phone" style="font-size: 10px;"></div>
+						<div v-text="'心率:'+member.heartRate" style="font-size: 10px;"></div>
+						<div v-text="'卡路里:'+member.calorie" style="flex-grow: 1;font-size: 6px;"></div>
+						<div v-text="'时间:'+member.time" style="font-size: 10px;"></div>
+					</div>
+					<div
+						style="display: flex;flex-direction: column;justify-content: center;padding-right: 5px;text-align: center;">
+						<div>
+							<button type="button" class="mui-btn mui-btn-red" @click="deleteMember(member)">删除</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+			let vue = new Vue({
+				el: '#app',
+				data: {
+					memberList: [],
+				},
+				methods: {
+					getMemberList: function() {
+						var that = this;
+						$.ajax({
+							type: "get",
+							url: "data/admin.json",
+							success: function(result) {
+								if (typeof(result) == 'string')
+									result = JSON.parse(result)
+								if (result.state) {
+									var memberList = result.memberList;
+									that.memberList = memberList;
+								} else {
+									mui.alert(result.msg);
+								}
+							},
+							error: function(obj, errorInfo) {
+								console.log(errorInfo)
+							}
+						});
+					},
+					deleteMember: function(member) {
+						var that = this;
+						mui.confirm('确定删除', '警告', ['取消', '确认'], function(e) {
+							if (e.index == 1) {
+								/**
+								 * 此处插入你们的删除算法，删除成功后执行下面的算法
+								 */
+
+								/**删除成功执行开始**/
+								var index = that.memberList.indexOf(member);
+								if (index != -1)
+									that.memberList.splice(index, 1);
+								/**删除成功执行结束**/
+							}
+						}, 'div')
+					}
+				},
+				mounted: function() {
+					this.getMemberList();
+				}
+			});
+		</script>
+	</body>
+</html>

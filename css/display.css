@@ -1,0 +1,160 @@
+body {
+	margin: 0;
+	padding: 0;
+	line-height: initial;
+}
+
+.mui-content {
+	background-color: transparent;
+	display: block;
+}
+
+.title {
+	text-align: center;
+	color: white;
+	margin-top: 40px;
+}
+
+.body {
+	text-align: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 1300px;
+	margin: 40px auto;
+}
+
+.body .list {
+	/* border: 1px solid gray; */
+	width: 410px;
+	height: 700px;
+	border-radius: 10px;
+	/* opacity: 0.6; */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+
+.listLeft {
+	background-color: rgba(20, 51, 200, 0.5)
+}
+
+.listMiddle {
+	background-color: rgba(180, 0, 54, 0.5)
+}
+
+.listRight {
+	background-color: rgba(88, 88, 88, 0.6)
+}
+
+.listInner {
+	/* border: 1px solid #930613; */
+	width: 360px;
+	height: 650px;
+	color: white;
+}
+
+.listHead {
+	text-align: left;
+	font-size: 20px;
+	font-weight: bold;
+	height: 70px;
+}
+
+.listHeadTitle {
+	font-size: 10px;
+	font-weight: normal;
+	padding: 3px 20px;
+	border-radius: 20px;
+}
+
+.listLeft .listHeadTitle {
+	background-color: #1433DC;
+}
+
+.listMiddle .listHeadTitle {
+	background-color: #E83936;
+}
+
+.listRight .listHeadTitle {
+	background-color: #E8E8E8;
+	color: #343434;
+}
+
+.listBody {
+	height: 580px;
+	overflow: hidden;
+}
+
+.listItem {
+	display: flex;
+	flex-direction: row;
+	height: 55px;
+	border-bottom: 2px solid #808080;
+	align-items: center;
+}
+
+.listItem div {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.item1 {
+	position: relative;
+	justify-content: center;
+	width: 30px;
+	margin-right: 10px;
+}
+
+.item1 img {
+	position: absolute;
+	width: 30px;
+}
+.item1 span {
+	position: absolute;
+}
+
+.item2 {
+	width: 25px;
+}
+
+.item2 img {
+	width: 10px;
+	background-color: #D7CACB;
+	padding: 5px;
+	border-radius: 5px;
+}
+
+.item3 {
+	flex-grow: 1;
+}
+
+.item4 {
+	width: 25px;
+}
+
+.item4 img {
+	width: 20px;
+	border-radius: 5px;
+}
+
+.item5 {
+	width: 40px;
+	font-weight: bold;
+}
+
+.item6 {
+	width: 25px;
+}
+
+.item6 img {
+	width: 20px;
+	border-radius: 5px;
+}
+
+.item7 {
+	width: 60px;
+	font-weight: bold;
+}
